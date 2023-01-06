@@ -4,6 +4,7 @@
   "package": "net.blumbo.clientsidedcrystals.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "client.ClientPlayNetworkHandlerMixin",
     "server.EndCrystalEntityMixin",
     "server.EndCrystalItemMixin",
     "server.EntityTrackerEntryMixin",

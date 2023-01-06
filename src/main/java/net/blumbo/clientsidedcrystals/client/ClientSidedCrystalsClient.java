@@ -17,6 +17,7 @@ public class ClientSidedCrystalsClient implements ClientModInitializer {
     private static int currentCrystalId = 0;
     public static HashMap<Integer, ClientFastEndCrystalEntity> clientCrystals = new HashMap<>();
     public static HashSet<Integer> fastHitCrystalIds = new HashSet<>();
+    public static int lastSuccessCrystalAge = 0;
 
     public static int newCrystalId() {
         return ++currentCrystalId;
@@ -31,6 +32,7 @@ public class ClientSidedCrystalsClient implements ClientModInitializer {
         if (endCrystal != null) {
             ClientSidedCrystalsClient.clientCrystals.remove(ownerCrystalId);
             world.removeEntity(endCrystal.getId(), Entity.RemovalReason.KILLED);
+            ClientSidedCrystalsClient.lastSuccessCrystalAge = endCrystal.endCrystalAge;
         }
     }
 
