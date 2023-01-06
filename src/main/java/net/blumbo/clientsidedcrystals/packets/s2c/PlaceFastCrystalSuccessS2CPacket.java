@@ -24,11 +24,9 @@ public class PlaceFastCrystalSuccessS2CPacket extends EntitySpawnS2CPacket {
     }
 
     public static void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        System.out.println(0);
         PlaceFastCrystalSuccessS2CPacket packet = new PlaceFastCrystalSuccessS2CPacket(buf);
         ClientSidedCrystalsClient.removeCrystal(handler.getWorld(), packet.ownerCrystalId);
         if (!ClientSidedCrystalsClient.fastHitCrystalIds.remove(packet.ownerCrystalId)) {
-            System.out.println(1);
             try {
                 packet.apply(handler);
             } catch (OffThreadException ignored) {}

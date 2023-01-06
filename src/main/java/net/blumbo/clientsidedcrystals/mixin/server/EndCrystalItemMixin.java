@@ -12,10 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.List;
 
 @Mixin(EndCrystalItem.class)
 public class EndCrystalItemMixin {
@@ -38,21 +35,5 @@ public class EndCrystalItemMixin {
 
         return fastEndCrystal;
     }
-
-    /*@Redirect(method = "useOnBlock", at = @At(value = "INVOKE", target = "Ljava/util/List;isEmpty()Z"))
-    private boolean crystalCheck(List<Entity> instance) {
-        if (instance.isEmpty() || !(context.getPlayer() instanceof ServerPlayerEntity serverPlayer) ||
-                ClientSidedCrystals.lastPlacementId == null) {
-            return instance.isEmpty();
-        }
-
-        for (Entity entity : instance) {
-            if (entity instanceof FastEndCrystalEntity crystal) {
-                ClientSidedCrystals.sendCrystalPacket(serverPlayer, crystal);
-                return instance.isEmpty();
-            }
-        }
-        return instance.isEmpty();
-    }*/
 
 }

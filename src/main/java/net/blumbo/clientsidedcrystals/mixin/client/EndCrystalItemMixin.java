@@ -5,7 +5,6 @@ import net.blumbo.clientsidedcrystals.client.ClientSidedCrystalsClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.EndCrystalItem;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +22,6 @@ public class EndCrystalItemMixin {
         if (context.getPlayer() == null) return;
         if (!context.getWorld().isClient) return;
 
-        context.getPlayer().sendMessage(Text.of("Server has mod: " + ClientSidedCrystalsClient.serverHasMod), false);
         if (ClientSidedCrystalsClient.serverHasMod) {
             placeClientCrystal(context);
         }

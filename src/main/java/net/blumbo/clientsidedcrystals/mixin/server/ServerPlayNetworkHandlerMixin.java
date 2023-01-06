@@ -6,6 +6,7 @@ import net.blumbo.clientsidedcrystals.packets.ModPackets;
 import net.blumbo.clientsidedcrystals.packets.c2s.FastHitCrystalC2SPacket;
 import net.blumbo.clientsidedcrystals.packets.c2s.FastHitFastCrystalC2SPacket;
 import net.blumbo.clientsidedcrystals.packets.c2s.PlaceFastCrystalC2SPacket;
+import net.blumbo.clientsidedcrystals.packets.s2c.FastHitFastCrystalCancelS2CPacket;
 import net.blumbo.clientsidedcrystals.packets.s2c.PlaceFastCrystalCancelS2CPacket;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
@@ -73,29 +74,21 @@ public abstract class ServerPlayNetworkHandlerMixin {
         shouldCancel = false;
         if (!(instance instanceof FastHitFastCrystalC2SPacket packet)) return instance.getEntity(world);
 
-        System.out.println("Received packet");
-
         if (!ClientSidedCrystals.fastEndCrystals.containsKey(player.getUuid())) {
             shouldCancel = true;
             return null;
         }
-        System.out.println("Contains key");
-
         FastEndCrystalEntity crystal = ClientSidedCrystals.fastEndCrystals.get(player.getUuid()).get(packet.ownerCrystalId);
         if (crystal == null) {
             shouldCancel = true;
             return null;
         }
-        System.out.println("Crystal is not null");
-
         packet.entityId = crystal.getId();
         Entity entity = packet.getEntity(player.getWorld());
         if (!(entity instanceof EndCrystalEntity)) {
             shouldCancel = true;
             return null;
         }
-
-        System.out.println("Entity is End Crystal");
         return entity;
     }
 
@@ -104,7 +97,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
     private void cancelHitFast(PlayerInteractEntityC2SPacket packet, CallbackInfo ci) {
         if (shouldCancel) {
             if (packet instanceof FastHitFastCrystalC2SPacket hitFastPacket) {
-                hitFastPacket.sendFailure(player);
+                ServerPlayNetworking.send(player, ModPackets.FAST_HIT_FAST_CRYSTAL_CANCEL_ID,
+                        new FastHitFastCrystalCancelS2CPacket(hitFastPacket.ownerCrystalId).write());
             }
             ci.cancel();
         }
@@ -112,23 +106,5 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
     private boolean isFastHitPacket(PlayerInteractEntityC2SPacket packet) {
         return packet instanceof FastHitCrystalC2SPacket || packet instanceof FastHitFastCrystalC2SPacket;
-    }
-
-
-    @Inject(method = "onPlayerInteractEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerEntity;updateLastActionTime()V"))
-    private void aaAAAAAAAa(PlayerInteractEntityC2SPacket packet, CallbackInfo ci) {
-        System.out.println(1.1);
-    }
-
-
-    @Inject(method = "onPlayerInteractEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket;handle(Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket$Handler;)V"))
-    private void aaAAAAAAAa1(PlayerInteractEntityC2SPacket packet, CallbackInfo ci) {
-        System.out.println(1.2);
-    }
-
-
-    @Inject(method = "onPlayerInteractEntity", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket;handle(Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket$Handler;)V"))
-    private void aaAAAAAAAa12(PlayerInteractEntityC2SPacket packet, CallbackInfo ci) {
-        System.out.println(1.3);
     }
 }

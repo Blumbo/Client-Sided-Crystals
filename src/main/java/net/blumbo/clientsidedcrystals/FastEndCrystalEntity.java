@@ -5,7 +5,6 @@ import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 
-import java.util.HashMap;
 import java.util.UUID;
 
 public class FastEndCrystalEntity extends EndCrystalEntity {
@@ -18,7 +17,6 @@ public class FastEndCrystalEntity extends EndCrystalEntity {
         this.crystalOwner = crystalOwner;
         this.ownerCrystalId = ownerCrystalId;
 
-        UUID ownerUUID = crystalOwner.getUuid();
         ClientSidedCrystals.fastEndCrystals.get(crystalOwner.getUuid()).put(ownerCrystalId, this);
     }
 
