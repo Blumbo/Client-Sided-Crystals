@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.blumbo.clientsidedcrystals.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "server.EndCrystalEntityMixin",
+    "server.EndCrystalItemMixin",
+    "server.EntityTrackerEntryMixin",
+    "server.PlayerManagerMixin",
+    "server.ServerPlayNetworkHandlerMixin"
+  ],
+  "client": [
+    "client.ClientPlayerInteractionManagerMixin",
+    "client.ConnectScreenMixin",
+    "client.EndCrystalItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

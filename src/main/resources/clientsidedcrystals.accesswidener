@@ -1,0 +1,8 @@
+accessWidener	v1	named
+accessible  field  net/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket	  entityId  I
+accessible field net/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket ATTACK Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket$InteractTypeHandler;
+mutable field net/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket	  entityId  I
+accessible class net/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket$InteractTypeHandler
+accessible method net/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket <init>  (IZLnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket$InteractTypeHandler;)V
+
+extendable    method    net/minecraft/entity/Entity    setRemoved    (Lnet/minecraft/entity/Entity$RemovalReason;)V
