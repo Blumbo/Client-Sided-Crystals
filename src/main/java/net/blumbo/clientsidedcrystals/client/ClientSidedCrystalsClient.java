@@ -14,6 +14,7 @@ import java.util.HashSet;
 public class ClientSidedCrystalsClient implements ClientModInitializer {
 
     public static boolean serverHasMod = false;
+
     private static int currentCrystalId = 0;
     public static HashMap<Integer, ClientFastEndCrystalEntity> clientCrystals = new HashMap<>();
     public static HashSet<Integer> fastHitCrystalIds = new HashSet<>();

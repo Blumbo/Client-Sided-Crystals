@@ -11,9 +11,8 @@
     "server.ServerPlayNetworkHandlerMixin"
   ],
   "client": [
-    "client.ClientPlayNetworkHandlerMixin",
     "client.ClientPlayerInteractionManagerMixin",
-    "client.ConnectScreenMixin",
+    "client.ClientPlayNetworkHandlerMixin",
     "client.EndCrystalItemMixin"
   ],
   "injectors": {
