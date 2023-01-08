@@ -29,9 +29,9 @@ public class ClientSidedCrystals implements ModInitializer {
     public static void sendCrystalPacket(ServerPlayerEntity player, EndCrystalEntity crystal) {
         EntitySpawnS2CPacket crystalSpawnPacket = new EntitySpawnS2CPacket(crystal);
         player.networkHandler.sendPacket(crystalSpawnPacket);
-        if (!crystal.getDataTracker().isEmpty()) {
+        if (crystal.getDataTracker().getChangedEntries() != null) {
             player.networkHandler.sendPacket(
-                    new EntityTrackerUpdateS2CPacket(crystal.getId(), crystal.getDataTracker(), true));
+                    new EntityTrackerUpdateS2CPacket(crystal.getId(), crystal.getDataTracker().getChangedEntries()));
         }
     }
 
