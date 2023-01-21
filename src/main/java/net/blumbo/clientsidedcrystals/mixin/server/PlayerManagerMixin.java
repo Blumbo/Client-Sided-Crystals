@@ -21,12 +21,17 @@ public abstract class PlayerManagerMixin {
 
     @Inject(method = "onPlayerConnect", at = @At("TAIL"))
     private void sendModPacket(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) {
-        ServerPlayNetworking.send(player, ModPackets.MOD_EXISTENCE_ID, PacketByteBufs.create());
+        if (ClientSidedCrystals.enableOnJoin) {
+            ServerPlayNetworking.send(player, ModPackets.MOD_ENABLE_ID, PacketByteBufs.create());
+        } else {
+            ClientSidedCrystals.disabledPlayers.add(player.getUuid());
+        }
     }
 
     @Inject(method = "remove", at = @At("HEAD"))
     private void removePlayer(ServerPlayerEntity player, CallbackInfo ci) {
         ClientSidedCrystals.fastEndCrystals.remove(player.getUuid());
+        ClientSidedCrystals.disabledPlayers.remove(player.getUuid());
     }
 
 }

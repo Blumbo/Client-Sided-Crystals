@@ -1,6 +1,10 @@
 package net.blumbo.clientsidedcrystals.packets.c2s;
 
+import net.blumbo.clientsidedcrystals.ClientSidedCrystals;
+import net.blumbo.clientsidedcrystals.packets.ModPackets;
+import net.blumbo.clientsidedcrystals.packets.s2c.FastHitFastCrystalCancelS2CPacket;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.OffThreadException;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
@@ -29,6 +33,12 @@ public class FastHitFastCrystalC2SPacket extends PlayerInteractEntityC2SPacket {
 
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         FastHitFastCrystalC2SPacket packet = new FastHitFastCrystalC2SPacket(buf);
+
+        if (ClientSidedCrystals.disabledPlayers.contains(player.getUuid())) {
+            ServerPlayNetworking.send(player, ModPackets.FAST_HIT_FAST_CRYSTAL_CANCEL_ID,
+                    new FastHitFastCrystalCancelS2CPacket(packet.ownerCrystalId).write());
+        }
+
         try {
             handler.onPlayerInteractEntity(packet);
         } catch (OffThreadException ignored) {}

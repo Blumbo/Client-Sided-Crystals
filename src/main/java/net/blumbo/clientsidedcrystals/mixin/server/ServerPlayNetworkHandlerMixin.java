@@ -30,12 +30,13 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
     @Inject(method = "onPlayerInteractBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/network/ServerPlayerInteractionManager;interactBlock(Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/Hand;Lnet/minecraft/util/hit/BlockHitResult;)Lnet/minecraft/util/ActionResult;"))
     private void setPlaceCrystalId(PlayerInteractBlockC2SPacket packet, CallbackInfo ci) {
-        if (packet instanceof PlaceFastCrystalC2SPacket placeCrystalPacket) {
-            ClientSidedCrystals.lastPlacementId = placeCrystalPacket.ownerCrystalId;
-            ClientSidedCrystals.lastPlacementSucceeded = false;
-        } else {
+        if (!(packet instanceof PlaceFastCrystalC2SPacket placeCrystalPacket)) {
             ClientSidedCrystals.lastPlacementId = null;
+            return;
         }
+
+        ClientSidedCrystals.lastPlacementId = placeCrystalPacket.ownerCrystalId;
+        ClientSidedCrystals.lastPlacementSucceeded = false;
     }
 
     @Inject(method = "onPlayerInteractBlock", at = @At(value = "INVOKE", shift= At.Shift.AFTER, target = "Lnet/minecraft/server/network/ServerPlayerInteractionManager;interactBlock(Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;Lnet/minecraft/util/Hand;Lnet/minecraft/util/hit/BlockHitResult;)Lnet/minecraft/util/ActionResult;"))
@@ -70,25 +71,26 @@ public abstract class ServerPlayNetworkHandlerMixin {
     private boolean shouldCancel = false;
 
     @Redirect(method = "onPlayerInteractEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket;getEntity(Lnet/minecraft/server/world/ServerWorld;)Lnet/minecraft/entity/Entity;"))
-    private Entity getHitFastEntity(PlayerInteractEntityC2SPacket instance, ServerWorld world) {
+    private Entity getHitEntity(PlayerInteractEntityC2SPacket instance, ServerWorld world) {
         shouldCancel = false;
-        if (!(instance instanceof FastHitFastCrystalC2SPacket packet)) return instance.getEntity(world);
+        if (!(instance instanceof FastHitFastCrystalC2SPacket)) return instance.getEntity(world);
 
-        if (!ClientSidedCrystals.fastEndCrystals.containsKey(player.getUuid())) {
-            shouldCancel = true;
-            return null;
-        }
+        Entity entity = getFastCrystal((FastHitFastCrystalC2SPacket) instance);
+        if (entity == null) shouldCancel = true;
+
+        return entity;
+    }
+
+    private Entity getFastCrystal(FastHitFastCrystalC2SPacket packet) {
+        if (!ClientSidedCrystals.fastEndCrystals.containsKey(player.getUuid())) return null;
+
         FastEndCrystalEntity crystal = ClientSidedCrystals.fastEndCrystals.get(player.getUuid()).get(packet.ownerCrystalId);
-        if (crystal == null) {
-            shouldCancel = true;
-            return null;
-        }
+        if (crystal == null) return null;
+
         packet.entityId = crystal.getId();
         Entity entity = packet.getEntity(player.getWorld());
-        if (!(entity instanceof EndCrystalEntity)) {
-            shouldCancel = true;
-            return null;
-        }
+        if (!(entity instanceof EndCrystalEntity)) return null;
+
         return entity;
     }
 

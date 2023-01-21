@@ -2,12 +2,15 @@ package net.blumbo.clientsidedcrystals;
 
 import net.blumbo.clientsidedcrystals.packets.ModPackets;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.network.packet.s2c.play.EntityTrackerUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.UUID;
 
 public class ClientSidedCrystals implements ModInitializer {
@@ -21,6 +24,8 @@ public class ClientSidedCrystals implements ModInitializer {
     public static Integer lastHitId = null;
     public static Boolean lastHitSucceeded = null;
 
+    public static HashSet<UUID> disabledPlayers = new HashSet<>();
+
     @Override
     public void onInitialize() {
         ModPackets.registerC2S();
@@ -33,6 +38,20 @@ public class ClientSidedCrystals implements ModInitializer {
             player.networkHandler.sendPacket(
                     new EntityTrackerUpdateS2CPacket(crystal.getId(), crystal.getDataTracker().getChangedEntries()));
         }
+    }
+
+    // These are for anyone using this mod as a library
+
+    public static boolean enableOnJoin = true;
+
+    public static void enableForPlayer(ServerPlayerEntity player) {
+        disabledPlayers.remove(player.getUuid());
+        ServerPlayNetworking.send(player, ModPackets.MOD_ENABLE_ID, PacketByteBufs.create());
+    }
+
+    public static void disableForPlayer(ServerPlayerEntity player) {
+        disabledPlayers.add(player.getUuid());
+        ServerPlayNetworking.send(player, ModPackets.MOD_DISABLE_ID, PacketByteBufs.create());
     }
 
 }
