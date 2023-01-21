@@ -1,5 +1,6 @@
 package net.blumbo.clientsidedcrystals.packets.c2s;
 
+import net.blumbo.clientsidedcrystals.ClientSidedCrystals;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.EndCrystalEntity;
@@ -27,11 +28,19 @@ public class FastHitCrystalC2SPacket extends PlayerInteractEntityC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         FastHitCrystalC2SPacket packet = new FastHitCrystalC2SPacket(buf);
         Entity entity = packet.getEntity(player.getWorld());
-        if (entity instanceof EndCrystalEntity) {
-            try {
-                handler.onPlayerInteractEntity(packet);
-            } catch (OffThreadException ignored) {}
+
+        if (!(entity instanceof EndCrystalEntity crystal)) {
+            return;
         }
+
+        if (ClientSidedCrystals.disabledPlayers.contains(player.getUuid())) {
+            ClientSidedCrystals.sendCrystalPacket(player, crystal);
+            return;
+        }
+
+        try {
+            handler.onPlayerInteractEntity(packet);
+        } catch (OffThreadException ignored) {}
     }
 
 }

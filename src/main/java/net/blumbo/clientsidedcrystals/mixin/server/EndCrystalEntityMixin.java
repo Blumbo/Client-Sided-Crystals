@@ -20,7 +20,7 @@ public abstract class EndCrystalEntityMixin extends Entity {
 
     @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"))
     private void onExplode(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (getId() == ClientSidedCrystals.lastHitId) {
+        if (ClientSidedCrystals.lastHitId != null && getId() == ClientSidedCrystals.lastHitId) {
             ClientSidedCrystals.lastHitSucceeded = true;
         }
     }
