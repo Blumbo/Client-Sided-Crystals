@@ -16,7 +16,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.Items;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.c2s.play.PlayerInteractBlockC2SPacket;
 import net.minecraft.util.ActionResult;
@@ -44,7 +44,7 @@ public abstract class ClientPlayerInteractionManagerMixin {
         return actionResult;
     }
 
-    @Redirect(method = "sendSequencedPacket", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V"))
+    @Redirect(method = "sendSequencedPacket", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/packet/Packet;)V"))
     private void sendPacket(ClientPlayNetworkHandler handler, Packet<?> packet) {
         if (sendFastCrystalPacket && packet instanceof PlayerInteractBlockC2SPacket interactPacket) {
 
@@ -61,13 +61,13 @@ public abstract class ClientPlayerInteractionManagerMixin {
         }
     }
 
-    @Inject(method = "attackEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V"))
+    @Inject(method = "attackEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/packet/Packet;)V"))
     private void getVariables(PlayerEntity player, Entity target, CallbackInfo ci) {
         attackerPlayer = player;
         attackedEntity = target;
     }
 
-    @Redirect(method = "attackEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V"))
+    @Redirect(method = "attackEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/packet/Packet;)V"))
     private void sendAttackPacket(ClientPlayNetworkHandler instance, Packet<?> packet) {
         if (!ClientSidedCrystalsClient.serverHasMod || !(attackedEntity instanceof EndCrystalEntity crystal)) {
             instance.sendPacket(packet);
