@@ -61,7 +61,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
     @Inject(method = "onPlayerInteractEntity", at = @At(value = "INVOKE", shift = At.Shift.AFTER, target = "Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket;handle(Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket$Handler;)V"))
     private void sendEpicHitFailure(PlayerInteractEntityC2SPacket packet, CallbackInfo ci) {
         if (isFastHitPacket(packet) && !ClientSidedCrystals.lastHitSucceeded) {
-            Entity entity = packet.getEntity(player.getWorld());
+            Entity entity = packet.getEntity(player.getServerWorld());
             if (entity instanceof EndCrystalEntity crystal) {
                 ClientSidedCrystals.sendCrystalPacket(player, crystal);
             }
@@ -88,7 +88,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
         if (crystal == null) return null;
 
         packet.entityId = crystal.getId();
-        Entity entity = packet.getEntity(player.getWorld());
+        Entity entity = packet.getEntity(player.getServerWorld());
         if (!(entity instanceof EndCrystalEntity)) return null;
 
         return entity;

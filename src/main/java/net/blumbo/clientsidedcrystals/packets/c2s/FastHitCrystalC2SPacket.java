@@ -27,7 +27,7 @@ public class FastHitCrystalC2SPacket extends PlayerInteractEntityC2SPacket {
 
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         FastHitCrystalC2SPacket packet = new FastHitCrystalC2SPacket(buf);
-        Entity entity = packet.getEntity(player.getWorld());
+        Entity entity = packet.getEntity(player.getServerWorld());
 
         if (!(entity instanceof EndCrystalEntity crystal)) {
             return;
