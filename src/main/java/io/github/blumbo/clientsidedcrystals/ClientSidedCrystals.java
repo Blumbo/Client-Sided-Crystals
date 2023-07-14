@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
 
+@SuppressWarnings("unused")
 public class ClientSidedCrystals implements ModInitializer {
 
     public static final String MOD_ID = "clientsidedcrystals";
@@ -44,11 +45,17 @@ public class ClientSidedCrystals implements ModInitializer {
 
     public static boolean enableOnJoin = true;
 
+    /**
+     * Enable Client-Sided Crystals for a specific player,
+     */
     public static void enableForPlayer(ServerPlayerEntity player) {
         disabledPlayers.remove(player.getUuid());
         ServerPlayNetworking.send(player, ModPackets.MOD_ENABLE_ID, PacketByteBufs.create());
     }
 
+    /**
+     * Disable Client-Sided Crystals for a specific player,
+     */
     public static void disableForPlayer(ServerPlayerEntity player) {
         disabledPlayers.add(player.getUuid());
         ServerPlayNetworking.send(player, ModPackets.MOD_DISABLE_ID, PacketByteBufs.create());
