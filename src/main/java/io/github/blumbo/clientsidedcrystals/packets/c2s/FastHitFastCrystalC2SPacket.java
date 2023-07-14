@@ -1,8 +1,8 @@
-package net.blumbo.clientsidedcrystals.packets.c2s;
+package io.github.blumbo.clientsidedcrystals.packets.c2s;
 
-import net.blumbo.clientsidedcrystals.ClientSidedCrystals;
-import net.blumbo.clientsidedcrystals.packets.ModPackets;
-import net.blumbo.clientsidedcrystals.packets.s2c.FastHitFastCrystalCancelS2CPacket;
+import io.github.blumbo.clientsidedcrystals.packets.ModPackets;
+import io.github.blumbo.clientsidedcrystals.packets.s2c.FastHitFastCrystalCancelS2CPacket;
+import io.github.blumbo.clientsidedcrystals.ClientSidedCrystals;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.OffThreadException;

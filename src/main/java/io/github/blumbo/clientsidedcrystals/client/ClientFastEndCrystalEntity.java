@@ -1,4 +1,4 @@
-package net.blumbo.clientsidedcrystals.client;
+package io.github.blumbo.clientsidedcrystals.client;
 
 import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.world.World;

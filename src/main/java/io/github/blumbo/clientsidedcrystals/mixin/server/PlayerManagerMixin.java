@@ -1,7 +1,7 @@
-package net.blumbo.clientsidedcrystals.mixin.server;
+package io.github.blumbo.clientsidedcrystals.mixin.server;
 
-import net.blumbo.clientsidedcrystals.ClientSidedCrystals;
-import net.blumbo.clientsidedcrystals.packets.ModPackets;
+import io.github.blumbo.clientsidedcrystals.packets.ModPackets;
+import io.github.blumbo.clientsidedcrystals.ClientSidedCrystals;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.ClientConnection;

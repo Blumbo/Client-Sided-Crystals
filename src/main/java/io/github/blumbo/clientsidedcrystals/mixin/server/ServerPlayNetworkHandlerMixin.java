@@ -1,13 +1,13 @@
-package net.blumbo.clientsidedcrystals.mixin.server;
+package io.github.blumbo.clientsidedcrystals.mixin.server;
 
-import net.blumbo.clientsidedcrystals.ClientSidedCrystals;
-import net.blumbo.clientsidedcrystals.FastEndCrystalEntity;
-import net.blumbo.clientsidedcrystals.packets.ModPackets;
-import net.blumbo.clientsidedcrystals.packets.c2s.FastHitCrystalC2SPacket;
-import net.blumbo.clientsidedcrystals.packets.c2s.FastHitFastCrystalC2SPacket;
-import net.blumbo.clientsidedcrystals.packets.c2s.PlaceFastCrystalC2SPacket;
-import net.blumbo.clientsidedcrystals.packets.s2c.FastHitFastCrystalCancelS2CPacket;
-import net.blumbo.clientsidedcrystals.packets.s2c.PlaceFastCrystalCancelS2CPacket;
+import io.github.blumbo.clientsidedcrystals.FastEndCrystalEntity;
+import io.github.blumbo.clientsidedcrystals.packets.ModPackets;
+import io.github.blumbo.clientsidedcrystals.packets.c2s.FastHitFastCrystalC2SPacket;
+import io.github.blumbo.clientsidedcrystals.packets.c2s.PlaceFastCrystalC2SPacket;
+import io.github.blumbo.clientsidedcrystals.packets.s2c.FastHitFastCrystalCancelS2CPacket;
+import io.github.blumbo.clientsidedcrystals.packets.s2c.PlaceFastCrystalCancelS2CPacket;
+import io.github.blumbo.clientsidedcrystals.ClientSidedCrystals;
+import io.github.blumbo.clientsidedcrystals.packets.c2s.FastHitCrystalC2SPacket;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.EndCrystalEntity;

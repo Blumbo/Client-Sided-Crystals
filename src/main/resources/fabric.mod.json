@@ -13,10 +13,10 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "net.blumbo.clientsidedcrystals.client.ClientSidedCrystalsClient"
+      "io.github.blumbo.clientsidedcrystals.client.ClientSidedCrystalsClient"
     ],
     "main": [
-      "net.blumbo.clientsidedcrystals.ClientSidedCrystals"
+      "io.github.blumbo.clientsidedcrystals.ClientSidedCrystals"
     ]
   },
   "mixins": [

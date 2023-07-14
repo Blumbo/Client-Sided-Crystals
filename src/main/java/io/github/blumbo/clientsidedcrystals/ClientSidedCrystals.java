@@ -1,6 +1,6 @@
-package net.blumbo.clientsidedcrystals;
+package io.github.blumbo.clientsidedcrystals;
 
-import net.blumbo.clientsidedcrystals.packets.ModPackets;
+import io.github.blumbo.clientsidedcrystals.packets.ModPackets;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;

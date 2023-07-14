@@ -1,7 +1,7 @@
-package net.blumbo.clientsidedcrystals.mixin.client;
+package io.github.blumbo.clientsidedcrystals.mixin.client;
 
-import net.blumbo.clientsidedcrystals.client.ClientFastEndCrystalEntity;
-import net.blumbo.clientsidedcrystals.client.ClientSidedCrystalsClient;
+import io.github.blumbo.clientsidedcrystals.client.ClientFastEndCrystalEntity;
+import io.github.blumbo.clientsidedcrystals.client.ClientSidedCrystalsClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.EndCrystalItem;
 import net.minecraft.item.ItemUsageContext;

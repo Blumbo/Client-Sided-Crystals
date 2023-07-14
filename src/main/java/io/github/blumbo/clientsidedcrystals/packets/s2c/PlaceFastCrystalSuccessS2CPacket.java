@@ -1,7 +1,7 @@
-package net.blumbo.clientsidedcrystals.packets.s2c;
+package io.github.blumbo.clientsidedcrystals.packets.s2c;
 
-import net.blumbo.clientsidedcrystals.FastEndCrystalEntity;
-import net.blumbo.clientsidedcrystals.client.ClientSidedCrystalsClient;
+import io.github.blumbo.clientsidedcrystals.FastEndCrystalEntity;
+import io.github.blumbo.clientsidedcrystals.client.ClientSidedCrystalsClient;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;

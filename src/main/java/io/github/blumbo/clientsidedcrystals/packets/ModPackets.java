@@ -1,10 +1,10 @@
-package net.blumbo.clientsidedcrystals.packets;
+package io.github.blumbo.clientsidedcrystals.packets;
 
-import net.blumbo.clientsidedcrystals.ClientSidedCrystals;
-import net.blumbo.clientsidedcrystals.packets.c2s.FastHitCrystalC2SPacket;
-import net.blumbo.clientsidedcrystals.packets.c2s.FastHitFastCrystalC2SPacket;
-import net.blumbo.clientsidedcrystals.packets.c2s.PlaceFastCrystalC2SPacket;
-import net.blumbo.clientsidedcrystals.packets.s2c.*;
+import io.github.blumbo.clientsidedcrystals.ClientSidedCrystals;
+import io.github.blumbo.clientsidedcrystals.packets.c2s.FastHitCrystalC2SPacket;
+import io.github.blumbo.clientsidedcrystals.packets.c2s.FastHitFastCrystalC2SPacket;
+import io.github.blumbo.clientsidedcrystals.packets.c2s.PlaceFastCrystalC2SPacket;
+import io.github.blumbo.clientsidedcrystals.packets.s2c.*;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.util.Identifier;

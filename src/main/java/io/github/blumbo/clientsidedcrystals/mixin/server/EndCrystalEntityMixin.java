@@ -1,6 +1,6 @@
-package net.blumbo.clientsidedcrystals.mixin.server;
+package io.github.blumbo.clientsidedcrystals.mixin.server;
 
-import net.blumbo.clientsidedcrystals.ClientSidedCrystals;
+import io.github.blumbo.clientsidedcrystals.ClientSidedCrystals;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;

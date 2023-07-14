@@ -1,8 +1,8 @@
-package net.blumbo.clientsidedcrystals.mixin.server;
+package io.github.blumbo.clientsidedcrystals.mixin.server;
 
-import net.blumbo.clientsidedcrystals.FastEndCrystalEntity;
-import net.blumbo.clientsidedcrystals.packets.ModPackets;
-import net.blumbo.clientsidedcrystals.packets.s2c.PlaceFastCrystalSuccessS2CPacket;
+import io.github.blumbo.clientsidedcrystals.FastEndCrystalEntity;
+import io.github.blumbo.clientsidedcrystals.packets.ModPackets;
+import io.github.blumbo.clientsidedcrystals.packets.s2c.PlaceFastCrystalSuccessS2CPacket;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;

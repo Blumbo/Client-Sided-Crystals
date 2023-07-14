@@ -1,6 +1,6 @@
-package net.blumbo.clientsidedcrystals.packets.c2s;
+package io.github.blumbo.clientsidedcrystals.packets.c2s;
 
-import net.blumbo.clientsidedcrystals.ClientSidedCrystals;
+import io.github.blumbo.clientsidedcrystals.ClientSidedCrystals;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.EndCrystalEntity;

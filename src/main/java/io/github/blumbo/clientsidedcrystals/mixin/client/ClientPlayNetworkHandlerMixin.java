@@ -1,7 +1,7 @@
-package net.blumbo.clientsidedcrystals.mixin.client;
+package io.github.blumbo.clientsidedcrystals.mixin.client;
 
-import net.blumbo.clientsidedcrystals.client.ClientSidedCrystalsClient;
-import net.blumbo.clientsidedcrystals.packets.s2c.PlaceFastCrystalSuccessS2CPacket;
+import io.github.blumbo.clientsidedcrystals.client.ClientSidedCrystalsClient;
+import io.github.blumbo.clientsidedcrystals.packets.s2c.PlaceFastCrystalSuccessS2CPacket;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.EndCrystalEntity;
